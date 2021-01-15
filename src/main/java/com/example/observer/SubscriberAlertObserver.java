@@ -6,10 +6,12 @@ import java.util.List;
 
 public class SubscriberAlertObserver implements Observer {
     private String name;
+    private Subject subject;
     private final List<Video> noticeVideos;
 
     public SubscriberAlertObserver(String name, Subject subject) {
         this.name = name;
+        this.subject = subject;
         subject.addObserver(this);
         noticeVideos = new ArrayList<>();
     }
@@ -29,12 +31,12 @@ public class SubscriberAlertObserver implements Observer {
     }
 
     public void notice(String channelName, Video video) {
-        System.out.println(name+"님 "+channelName+"님이 "+video.getTitle()+"을 업로드 했습니다.");
+        System.out.println(name + "님 " + channelName + "님이 " + video.getTitle() + "을 업로드 했습니다.");
         System.out.println(video.getUploadDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
     }
 
-    public void unfoldAlert(){
-        for (Video v: noticeVideos){
+    public void unfoldAlert() {
+        for (Video v : noticeVideos) {
             System.out.println(v.getTitle());
             System.out.println(v.getUploadDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         }
